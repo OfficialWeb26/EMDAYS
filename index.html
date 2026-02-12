@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>Emdays Official Website</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Google Fonts（メタルっぽいロゴ用＋本文用） -->
+  <link href="https://fonts.googleapis.com/css2?family=Metal+Mania&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* === 基本設定 ========================= */
+    :root {
+      --bg-main: #050509;
+      --bg-sub: #101018;
+      --bg-card: #151521;
+      --accent: #d62839;
+      --accent-soft: rgba(214, 40, 57, 0.35);
+      --text-main: #f5f5f5;
+      --text-sub: #aaaaaa;
+      --border-soft: rgba(255, 255, 255, 0.08);
+      --shadow-soft: 0 0 20px rgba(0, 0, 0, 0.8);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #26111b 0, #050509 45%, #000000 100%);
+      color: var(--text-main);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* === レイアウト共通 ========================= */
+    .container {
+      width: 92%;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    section {
+      padding: 72px 0;
+    }
+
+    section:nth-of-type(odd) {
+      background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.02) 50%, transparent 100%);
+    }
+
+    .section-title {
+      font-family: "Source Han Code JP", system-ui;
+      font-size: 2rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      display: inline-block;
+      position: relative;
+      padding-bottom: 8px;
+    }
+
+    .section-title::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 120%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      box-shadow: 0 0 12px var(--accent-soft);
+    }
+
+    /* === ヘッダー & ナビ ========================= */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.6));
+      border-bottom: 1px solid var(--border-soft);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 4%;
+      max-width: 800px;
+      margin: 0 auto;
+      gap: 12px;
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .logo img {
+      height: 78px;
+      width: auto;
+    }
+
+    .logo-main {
+      font-family: "Source Han Code JP", system-ui;
+      font-size: 1.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-shadow: 0 0 10px var(--accent-soft);
+    }
+
+    .logo-sub {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--text-sub);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      font-size: 0.9rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      position: relative;
+      padding: 4px 0;
+      color: var(--text-sub);
+      white-space: nowrap;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.25s ease;
+      box-shadow: 0 0 8px var(--accent-soft);
+    }
+
+    nav a:hover {
+      color: var(--text-main);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* === ヒーロー ========================= */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 20vh;
+      display: flex;
+      align-items: center;
+      padding-top: 500px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("https://i.imgur.com/Oxb3wTi.jpeg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 1;
+      z-index: -1;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero-tagline {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-family: "Source Han Code JP", system-ui;
+      font-size: clamp(2.6rem, 5vw, 3.4rem);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      text-shadow: 0 0 18px rgba(0, 0, 0, 0.9);
+    }
+
+    .hero-lead {
+      color: var(--text-sub);
+      font-size: 0.95rem;
+      max-width: 36rem;
+      margin-bottom: 24px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .hero-meta span {
+      position: relative;
+      padding-left: 14px;
+    }
+
+    .hero-meta span::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      transform: translateY(-50%);
+      box-shadow: 0 0 10px var(--accent-soft);
+    }
+
+    .hero-visual {
+      position: relative;
+      padding: 18px;
+      border-radius: 22px;
+      background: radial-gradient(circle at top, rgba(214,40,57,0.18), rgba(0,0,0,0.95));
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
+
+    .hero-visual::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background-image: radial-gradient(circle at 0 0, rgba(214,40,57,0.18), transparent 55%),
+                        radial-gradient(circle at 100% 100%, rgba(255,255,255,0.08), transparent 55%);
+      mix-blend-mode: screen;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .hero-visual-inner {
+      position: relative;
+      border-radius: 16px;
+      border: 1px solid var(--border-soft);
+      padding: 16px;
+      background: radial-gradient(circle at top, #1e1e29, #050509);
+    }
+
+    .hero-visual-title {
+      font-family: "Source Han Code JP", system-ui;
+      font-size: 1.15rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .hero-visual-sub {
+      font-size: 0.75rem;
+      color: var(--text-sub);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+
+    .hero-visual-lineup {
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      list-style: none;
+      display: grid;
+      gap: 4px;
+      margin-top: 6px;
+    }
+
+    .hero-visual-lineup span {
+      color: var(--text-main);
+      margin-right: 6px;
+    }
+
+    /* === YouTubeセクション ========================= */
+    .youtube-wrapper {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 32px;
+      align-items: flex-start;
+    }
+
+    .youtube-embed {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 */
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+      background: #000;
+    }
+
+    .youtube-embed iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .youtube-text {
+      font-size: 0.9rem;
+      color: var(--text-sub);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .youtube-highlight {
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: rgba(214, 40, 57, 0.08);
+      border: 1px solid rgba(214, 40, 57, 0.3);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent);
+    }
+
+    /* === ディスコグラフィ ========================= */
+    .discography-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .release-card {
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: 16px 18px;
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .release-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(214,40,57,0.18), transparent 60%);
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    .release-year {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-sub);
+      margin-bottom: 4px;
+    }
+
+    .release-title {
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .release-type {
+      font-size: 0.75rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      margin-bottom: 10px;
+    }
+
+    .tracklist {
+      list-style: none;
+      font-size: 0.85rem;
+      color: var(--text-sub);
+      display: grid;
+      gap: 2px;
+      margin-bottom: 8px;
+    }
+
+    .release-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .release-links a {
+      font-size: 0.75rem;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.2);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .release-links a:hover {
+      border-color: var(--accent);
+      background: rgba(214,40,57,0.1);
+    }
+
+    /* === SNS / CONTACT ========================= */
+    .social-wrapper {
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 2fr);
+      gap: 30px;
+      align-items: flex-start;
+    }
+
+    .social-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: radial-gradient(circle at top, #22222f, #080810);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-1px);
+      border-color: var(--accent);
+      box-shadow: 0 0 16px var(--accent-soft);
+      background: radial-gradient(circle at top, #33131c, #050509);
+    }
+
+    .social-tag {
+      font-size: 0.85rem;
+      color: var(--text-sub);
+      margin-top: 10px;
+    }
+
+    .contact-card {
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: 16px 18px;
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+      font-size: 0.85rem;
+      color: var(--text-sub);
+    }
+
+    .contact-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    /* === フッター ========================= */
+    footer {
+      border-top: 1px solid var(--border-soft);
+      padding: 20px 0 28px;
+      margin-top: 40px;
+      background: #020203;
+      font-size: 0.75rem;
+      color: var(--text-sub);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-inner small {
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .footer-nav {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-nav a {
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.7rem;
+      white-space: nowrap;
+    }
+
+    /* === レスポンシブ ========================= */
+    @media (max-width: 820px) {
+      section {
+        padding: 56px 0;
+      }
+
+      .hero {
+        padding-top: 96px;
+        padding-bottom: 56px;
+        min-height: auto;
+      }
+
+      .hero-inner,
+      .youtube-wrapper,
+      .social-wrapper {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual {
+        max-width: 420px;
+        margin: 24px auto 0;
+        width: 100%;
+      }
+
+      nav ul {
+        gap: 12px;
+        font-size: 0.8rem;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+
+      .logo img {
+        height: 64px;
+      }
+
+      nav ul {
+        justify-content: flex-start;
+      }
+
+      .hero-title {
+        letter-spacing: 0.18em;
+        font-size: 2.2rem;
+      }
+
+      .hero-meta {
+        font-size: 0.75rem;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .social-buttons {
+        gap: 10px;
+      }
+
+      .social-btn {
+        font-size: 0.75rem;
+        padding: 8px 14px;
+      }
+    }
+  </style>
+</head>
+<body id="top">
+
+  <!-- ================= HEADER ================= -->
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <img src="https://i.imgur.com/MzYdQPe.png" alt="Emdays Logo">
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#youtube">Videos</a></li>
+          <li><a href="#discography">Discography</a></li>
+          <li><a href="#sns">Social</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <main>
+    <section class="hero" id="center">
+      <div class="container hero-inner">
+        <div>
+          <h1 class="hero-title">Emdays</h1>
+          <p class="hero-lead">
+            Emdays<br>
+            Future Deathcore
+          </p>
+          <div class="hero-meta">
+            <span>Genre : Metal</span>
+            <span>From : Japan</span>
+            <span>Active : 2025 -</span>
+          </div>
+        </div>
+
+        <aside class="hero-visual" aria-label="Band Info">
+          <div class="hero-visual-inner">
+            <div class="hero-visual-title">Live in Emotions</div>
+            <div class="hero-visual-sub">Current Line-up</div>
+            <ul class="hero-visual-lineup">
+              <li><span>Vo</span>AKIRA</li>
+              <li><span>Gt</span>DOLL＄SAW</li>
+              <li>A future metal band based in Tokyo.</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ================= YOUTUBE ================= -->
+    <section id="youtube">
+      <div class="container">
+        <h2 class="section-title">Videos</h2>
+        <div class="youtube-wrapper">
+          <div class="youtube-embed">
+            <iframe
+              src="https://youtu.be/0tpXYh_a2Iw"
+              title="Emdays - Overdose (Official Video)"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <div class="youtube-text">
+            <div class="youtube-highlight">
+              New Official Video / Overdose
+            </div>
+            <p>
+              最新MVなど随時更新。
+            </p>
+            <p>
+              YouTubeチャンネルでは、MV・メイキング映像・リリックビデオなどを公開予定。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= DISCOGRAPHY ================= -->
+    <section id="discography">
+      <div class="container">
+        <h2 class="section-title">Discography</h2>
+        <div class="discography-grid">
+
+          <!-- 1枚目の作品カード -->
+          <article class="release-card">
+            <div class="release-year">2026</div>
+            <div class="release-title">「Overdose」</div>
+            <div class="release-type">1st Single</div>
+            <ul class="tracklist">
+              <li>1. Overdose</li>
+            </ul>
+            <div class="release-links">
+              <a href="https://open.spotify.com/album/7I1ihUUMedsMPqiUevoTx3?si=v0QJ-7OzTQCjYypszFs5gw" target="_blank" rel="noopener">Spotify</a>
+              <a href="https://music.apple.com/jp/album/overdose/1871973391?i=1871973392" target="_blank" rel="noopener">Apple Music</a>
+              <a href="https://music.apple.com/jp/album/overdose-single/1871973391" target="_blank" rel="noopener">iTunes</a>
+
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SNS / CONTACT ================= -->
+    <section id="sns">
+      <div class="container">
+        <h2 class="section-title">Social / Contact</h2>
+        <div class="social-wrapper">
+          <div>
+            <p class="social-tag">
+              フォロー・チャンネル登録で、情報をチェック。
+            </p>
+            <div class="social-buttons">
+
+              <a class="social-btn"
+                 href="https://youtube.com/@plushdollofsheep?si=cOP1-Len1zjKpsPh"
+                 target="_blank" rel="noopener">
+                YouTube
+              </a>
+
+              <a class="social-btn"
+                 href="https://x.com/emdays_jp"
+                 target="_blank" rel="noopener">
+                X (Twitter)
+              </a>
+
+              <a class="social-btn"
+                 href="https://www.instagram.com/emdays.jp?igsh=MW1rNmNoajUwemZlOQ%3D%3D&utm_source=qr"
+                 target="_blank" rel="noopener">
+                Instagram
+              </a>
+
+              <a class="social-btn"
+                 href="https://www.tiktok.com/@emdays.jp?_r=1&_t=ZS-91dXieUGKFl"
+                 target="_blank" rel="noopener">
+                TikTok
+              </a>
+
+              <a class="social-btn"
+                 href="#"
+                 target="_blank" rel="noopener">
+                Spotify Artist
+              </a>
+
+            </div>
+          </div>
+
+          <aside class="contact-card">
+            <div class="contact-label">Booking / Contact</div>
+            <p>
+              ご連絡は、<br>
+              下記メールアドレスまでお願いします。
+            </p>
+            <p style="margin-top:10px;">
+              Mail : <a href="mailto:emdays.info@gmail.com">emdays.info@gmail.com</a>
+            </p>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <div class="container footer-inner">
+      <small>© Emdays – All Rights Reserved.</small>
+      <div class="footer-nav">
+        <a href="#top">Top</a>
+        <a href="#discography">Discography</a>
+        <a href="#sns">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
