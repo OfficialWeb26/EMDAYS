@@ -170,13 +170,12 @@
 
     /* === ヒーロー ========================= */
     .hero {
-      position: relative;
-      overflow: hidden;
-      min-height: 20vh;
-      display: flex;
-      align-items: center;
-      padding-top: 500px;
-    }
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh; /* 画面いっぱい */
+  display: flex;
+  align-items: center;
+}
 
     .hero::before {
       content: "";
@@ -528,33 +527,37 @@
 
     /* === レスポンシブ ========================= */
     @media (max-width: 820px) {
-      section {
-        padding: 56px 0;
-      }
+  section {
+    padding: 56px 0;
+  }
 
-      .hero {
-        padding-top: 96px;
-        padding-bottom: 56px;
-        min-height: auto;
-      }
+  /* ★ここを追加 */
+  .hero {
+    padding-top: 0;
+    min-height: 60vh;
+  }
 
-      .hero-inner,
-      .youtube-wrapper,
-      .social-wrapper {
-        grid-template-columns: 1fr;
-      }
+  .hero::before {
+    background-position: center top;
+  }
 
-      .hero-visual {
-        max-width: 420px;
-        margin: 24px auto 0;
-        width: 100%;
-      }
+  .hero-inner,
+  .youtube-wrapper,
+  .social-wrapper {
+    grid-template-columns: 1fr;
+  }
 
-      nav ul {
-        gap: 12px;
-        font-size: 0.8rem;
-      }
-    }
+  .hero-visual {
+    max-width: 420px;
+    margin: 24px auto 0;
+    width: 100%;
+  }
+
+  nav ul {
+    gap: 12px;
+    font-size: 0.8rem;
+  }
+}
 
     @media (max-width: 540px) {
       .header-inner {
