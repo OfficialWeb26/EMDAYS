@@ -169,19 +169,12 @@
     }
 
     /* === ヒーロー ========================= */
-    .hero {
-  position: relative;
-  overflow: hidden;
-  min-height: 100vh; /* 画面いっぱい */
-  display: flex;
-  align-items: center;
-}
 
     .hero::before {
       content: "";
       position: absolute;
       inset: 0;
-      background-image: url("https://i.imgur.com/Oxb3wTi.jpeg");
+      background-image: url("https://i.imgur.com/cNZahFi.jpeg");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -526,59 +519,73 @@
     }
 
     /* === レスポンシブ ========================= */
-    
-@media (max-width: 540px) {
-  .header-inner {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
-  }
+    @media (max-width: 820px) {
+      section {
+        padding: 56px 0;
+      }
 
-  .logo img {
-    height: 64px;
-  }
+      .hero {
+        padding-top: 96px;
+        padding-bottom: 56px;
+        min-height: auto;
+      }
 
-  nav ul {
-    justify-content: flex-start;
-  }
+      .hero-inner,
+      .youtube-wrapper,
+      .social-wrapper {
+        grid-template-columns: 1fr;
+      }
 
-  .hero-title {
-    letter-spacing: 0.18em;
-    font-size: 2.2rem;
-  }
+      .hero-visual {
+        max-width: 420px;
+        margin: 24px auto 0;
+        width: 100%;
+      }
 
-  .hero-meta {
-    font-size: 0.75rem;
-  }
+      nav ul {
+        gap: 12px;
+        font-size: 0.8rem;
+      }
+    }
 
-  .footer-inner {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+    @media (max-width: 540px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
 
-  .social-buttons {
-    gap: 10px;
-  }
+      .logo img {
+        height: 64px;
+      }
 
-  .social-btn {
-    font-size: 0.75rem;
-    padding: 8px 14px;
-  }
+      nav ul {
+        justify-content: flex-start;
+      }
 
-  /* === スマホ用ヒーロー背景差し替え === */
-  .hero::before {
-    background-image: url("https://i.imgur.com/LwAhXjT.jpeg");
-    background-size: cover;
-    background-position: center top;
-  }
+      .hero-title {
+        letter-spacing: 0.18em;
+        font-size: 2.2rem;
+      }
 
-  .hero {
-    min-height: 75vh;
-    padding-top: 0;
-  }
-}
-重要チェック（ここだけ注
+      .hero-meta {
+        font-size: 0.75rem;
+      }
 
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .social-buttons {
+        gap: 10px;
+      }
+
+      .social-btn {
+        font-size: 0.75rem;
+        padding: 8px 14px;
+      }
+    }
   </style>
 </head>
 <body id="top">
